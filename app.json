@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Ezy_Find",
+    "slug": "Ezy_Find",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.2.0",
+    "orientation": "portrait",
+    "splash": {
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "packagerOpts": {},
+    "description": "",
+    "android": {
+      "package": "com.yourcompany.yourappname",
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyBDBqtM4XqWQiXdjsOu6lAFTZgM7YcGfGM" }   
+     }
+    }
+  }
+}
