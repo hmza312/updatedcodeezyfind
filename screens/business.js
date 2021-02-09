@@ -25,6 +25,10 @@ export default class FindBusiness extends Component {
         })
     }
 
+    onPress = () => {
+        this.props.navigation.navigate('CreateBusiness')
+    }
+
     render() {
         return (
             <ScrollView  >
