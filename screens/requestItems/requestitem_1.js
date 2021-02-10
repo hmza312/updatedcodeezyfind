@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     StyleSheet, TouchableOpacity, Text, View, TextInput, ScrollView, Dimensions,
-    Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback
+    Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, Model
 
 
 } from 'react-native';
@@ -10,7 +10,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Input, CheckBox, Button, SocialIcon } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker'
 
-import { Block, Checkbox,theme } from 'galio-framework';
+import { Block, Checkbox, theme } from 'galio-framework';
 
 
 import { Icon } from '../../components';
@@ -27,13 +27,22 @@ export default class RequestItem1 extends Component {
         super(props);
         this.state = {
             country: 'Select Category',
-            date: "2016-05-15"
+            date: "2016-05-15",
+            modalVisible: false,
+            name:"",
+            email:"",
+            mobile:"",
+            password:""
         }
     }
 
     gotoNext = () => {
         this.props.navigation.navigate('Request2')
     }
+    setModalVisible = (visible) => {
+        this.setState({ modalVisible: visible });
+    }
+
 
     render() {
         return (
@@ -42,7 +51,7 @@ export default class RequestItem1 extends Component {
                     <Block flex middle>
                         <Block flex={1} style={styles.background}>
                             <Block flex={0.2}>
-                                <Text style={{fontSize:16}}>Slected Category</Text>
+                                <Text style={{ fontSize: 16 }}>Slected Category</Text>
                                 <Text>Category > Sub Category > Automotive</Text>
                             </Block>
                             <Block
@@ -66,42 +75,42 @@ export default class RequestItem1 extends Component {
                                     placeholder='Title'
                                     numberOfLines={7}
                                 />
-                                </Block>
-                                <View
-                                    style={{
-                                        marginTop: 20,
-                                        marginBottom: 20,
-                                        borderBottomColor: 'lightgrey',
-                                        borderBottomWidth: 1,
-                                    }}
-                                />
-                                <Block flex={0.3}>
-                                    <Text style={styles.text}>Schedule Appointment </Text>
-                                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                                        <View style={styles.inputWrap}>
-                                            <TextInput
-                                                style={styles.input}
-                                                onChangeText={text => onChangeText(text)}
-                                                placeholder='Date'
-                                            />
-                                        </View>
-                                        <View style={styles.inputWrap}>
-                                            <TextInput
-                                                style={styles.input}
-                                                onChangeText={text => onChangeText(text)}
-                                                placeholder='Time'
-                                            />
-                                        </View>
+                            </Block>
+                            <View
+                                style={{
+                                    marginTop: 20,
+                                    marginBottom: 20,
+                                    borderBottomColor: 'lightgrey',
+                                    borderBottomWidth: 1,
+                                }}
+                            />
+                            <Block flex={0.3}>
+                                <Text style={styles.text}>Schedule Appointment </Text>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={styles.inputWrap}>
+                                        <TextInput
+                                            style={styles.input}
+                                            onChangeText={text => onChangeText(text)}
+                                            placeholder='Date'
+                                        />
                                     </View>
-                                </Block>
-                                <View
-                                    style={{
-                                        marginTop: 20,
-                                        marginBottom: 20,
-                                        borderBottomColor: 'lightgrey',
-                                        borderBottomWidth: 1,
-                                    }}
-                                />
+                                    <View style={styles.inputWrap}>
+                                        <TextInput
+                                            style={styles.input}
+                                            onChangeText={text => onChangeText(text)}
+                                            placeholder='Time'
+                                        />
+                                    </View>
+                                </View>
+                            </Block>
+                            <View
+                                style={{
+                                    marginTop: 20,
+                                    marginBottom: 20,
+                                    borderBottomColor: 'lightgrey',
+                                    borderBottomWidth: 1,
+                                }}
+                            />
                             <View style={{ flex: 1, flexDirection: 'row' }}>
                                 <View style={styles.inputWrap}>
                                     <TouchableOpacity
@@ -123,6 +132,58 @@ export default class RequestItem1 extends Component {
                             </View>
                         </Block>
                     </Block>
+                    <Block >
+
+                        <Modal
+                            animationType="fade"
+                            transparent={true}
+                            visible={this.state.modalVisible}
+                            onRequestClose={() => {
+                                this.setState({ modalVisible: false })
+
+                            }}
+                        >
+
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <Text style={styles.textStyle}>You are  currently not signed in</Text>
+                                    <Text style={styles.textStyle}>To submit request Sign In</Text>
+
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={name => onChangeText(name)}
+                                        placeholder='Name'
+                                    />
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={email => onChangeText(email)}
+                                        placeholder='Email'
+                                    />
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={mobile => onChangeText(mobile)}
+                                        placeholder='Mobile Number'
+                                    />
+                                    <TextInput
+                                        style={styles.input}
+                                        onChangeText={password => onChangeText(password)}
+                                        placeholder='Password'
+                                    />
+
+                                    <View style={styles.container}>
+                                        <TouchableOpacity
+                                            style={styles.buttonpro}
+                                            onPress={this.onPress}
+                                        >
+                                            <Text style={{ color: "white" }}>Submit Request</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </Modal>
+
+                    </Block>
+
                 </ScrollView >
             </DismissKeyboard>
         )
@@ -131,8 +192,8 @@ export default class RequestItem1 extends Component {
 
 const styles = StyleSheet.create({
     background: {
-        width:width,
-        height:height,
+        width: width,
+        height: height,
         padding: '4%'
     },
     foreground: {
